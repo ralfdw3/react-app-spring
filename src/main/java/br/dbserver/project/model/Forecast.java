@@ -21,9 +21,11 @@ public class Forecast {
     @JoinColumn(name = "id_city", nullable = false)
     private City city;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Weather weather;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Shift shift;
 
