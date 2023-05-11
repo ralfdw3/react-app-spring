@@ -1,52 +1,50 @@
 package br.dbserver.project.service.forecast;
 
-import br.dbserver.project.dto.forecast.ForecastByCity;
 import br.dbserver.project.dto.forecast.ForecastRequest;
-import br.dbserver.project.dto.forecast.ForecastResponse;
+import br.dbserver.project.model.City;
 import br.dbserver.project.model.Forecast;
-import br.dbserver.project.repository.CityRepository;
 import br.dbserver.project.repository.ForecastRepository;
+import br.dbserver.project.service.city.CityService;
 import br.dbserver.project.service.exceptions.NotFoundException;
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
+@AllArgsConstructor
 @Service
 public class ForecastService implements ForecastServiceInterface {
 
     private final ForecastRepository forecastRepository;
-    private final CityRepository cityRepository;
+    private final CityService cityService;
 
-    @Autowired
-    public ForecastService(ForecastRepository forecastRepository, CityRepository cityRepository) {
-        this.forecastRepository = forecastRepository;
-        this.cityRepository = cityRepository;
-    }
 
 
     @Override
     public ResponseEntity save (ForecastRequest forecastRequest) {
-        return null;
+        City city = cityService.getCityByName(forecastRequest.city());
+        Forecast forecast = new Forecast(forecastRequest);
+        forecast.setCity(city);
+        Forecast savedForecast = forecastRepository.save(forecast);
+        return ResponseEntity.ok(savedForecast);
     }
 
     @Transactional
     @Override
     public ResponseEntity getByCity (String cityName, Pageable pageable) {
+        City city = cityService.getCityByName(cityName);
 
-        List<Forecast> forecasts = forecastRepository.findForecastsByCityId(cityRepository.findByName(cityName).getId());
+        List<Forecast> forecasts = forecastRepository.findForecastsByCityId(city.getId());
         if (forecasts.isEmpty()) {
-            throw new NotFoundException("Nenhuma previsão encontrada para a cidade " + forecastByCity.city().getName());
+            throw new NotFoundException("Nenhuma previsão encontrada para a cidade " + cityName);
         }
-        List<ForecastResponse> forecastResponses = forecasts.stream().map(city -> ).collect(Collectors.toList());
-        return ResponseEntity.ok().body(new PageImpl<>(forecastResponses, pageable, forecasts.size()));
+
+        return ResponseEntity.ok().body(new PageImpl<>(forecasts, pageable, forecasts.size()));
 
     }
 }

@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface ForecastRepository extends JpaRepository<Forecast, Long> {
     List<Forecast> findForecastsByCityId(Long cityId);
+
 }
