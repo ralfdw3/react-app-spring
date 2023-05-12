@@ -41,13 +41,13 @@ public class Forecast {
     private BigDecimal minTemperature;
 
     @Column(nullable = false)
-    private int precipitation;
+    private Integer precipitation;
 
     @Column(nullable = false)
-    private int humidity;
+    private Integer humidity;
 
     @Column(nullable = false)
-    private int airSpeed;
+    private Integer airSpeed;
 
     public Forecast(ForecastRequest forecastRequest) {
         this.weather = forecastRequest.weather();
