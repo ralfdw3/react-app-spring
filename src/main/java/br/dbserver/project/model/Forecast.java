@@ -1,10 +1,12 @@
 package br.dbserver.project.model;
 
 import br.dbserver.project.dto.forecast.ForecastRequest;
+import br.dbserver.project.dto.forecast.ForecastUpdate;
 import br.dbserver.project.enums.Shift;
 import br.dbserver.project.enums.Weather;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +16,7 @@ import java.math.BigDecimal;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public class Forecast {
 
     @Id
@@ -49,7 +52,8 @@ public class Forecast {
     @Column(nullable = false)
     private Integer airSpeed;
 
-    public Forecast(ForecastRequest forecastRequest) {
+    public Forecast(ForecastRequest forecastRequest, City city) {
+        this.city = city;
         this.weather = forecastRequest.weather();
         this.shift = forecastRequest.shift();
         this.maxTemperature = forecastRequest.maxTemperature();
@@ -59,7 +63,15 @@ public class Forecast {
         this.airSpeed = forecastRequest.airSpeed();
     }
 
-    public void setCity(City city) {
+    public void updateForecast(ForecastUpdate forecast, City city){
         this.city = city;
+        this.weather = forecast.weather();
+        this.shift = forecast.shift();
+        this.maxTemperature = forecast.maxTemperature();
+        this.minTemperature = forecast.minTemperature();
+        this.precipitation = forecast.precipitation();
+        this.humidity = forecast.humidity();
+        this.airSpeed = forecast.airSpeed();
     }
+
 }

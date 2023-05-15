@@ -1,7 +1,9 @@
 package br.dbserver.project.controller;
 
+import br.dbserver.project.dto.forecast.ForecastDelete;
 import br.dbserver.project.dto.forecast.ForecastRequest;
 import br.dbserver.project.dto.forecast.ForecastResponse;
+import br.dbserver.project.dto.forecast.ForecastUpdate;
 import br.dbserver.project.service.forecast.ForecastServiceInterface;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +24,22 @@ public class ForecastController {
     }
 
     @GetMapping
-    private ResponseEntity<Page<ForecastResponse>> getForecastsByCity (@Valid @RequestParam("cityName") String cityName, @PageableDefault(size = 10, sort = {"id,desc"}) Pageable pageable) {
-        return forecastService.getByCity(cityName, pageable);
+    private ResponseEntity<Page<ForecastResponse>> getForecastsByCity (@RequestParam("cityName") String cityName, @PageableDefault(size = 10, sort = {"id,desc"}) Pageable pageable) {
+        return forecastService.getForecastsByCity(cityName, pageable);
     }
 
     @PostMapping
-    private ResponseEntity saveForecast(@RequestBody ForecastRequest forecastRequest){
-        return forecastService.save(forecastRequest);
+    private ResponseEntity saveForecast(@RequestBody @Valid ForecastRequest forecastRequest){
+        return forecastService.saveForecast(forecastRequest);
     }
 
+    @PutMapping
+    private ResponseEntity updateForecast(@RequestBody @Valid ForecastUpdate forecastUpdate){
+        return forecastService.updateForecast(forecastUpdate);
+    }
+
+    @DeleteMapping
+    private ResponseEntity deleteForecast(@RequestParam("id") Long id){
+        return forecastService.deleteForecast(id);
+    }
 }

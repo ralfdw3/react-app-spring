@@ -1,4 +1,8 @@
 package br.dbserver.project.dto.city;
 
-public record CityRequest(String city) {
+import jakarta.validation.constraints.NotBlank;
+
+public record CityRequest(
+        @NotBlank
+        String city) {
 }
