@@ -1,14 +1,17 @@
 package br.dbserver.project.model;
 
+import br.dbserver.project.dto.city.CityRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class City {
 
     @Id
@@ -18,12 +21,7 @@ public class City {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "city_forecast", joinColumns = {
-            @JoinColumn(name = "id_city", referencedColumnName = "id") }, inverseJoinColumns = {
-            @JoinColumn(name = "id_forecast", referencedColumnName = "id")
-    })
-    private List<Forecast> forecast;
-
+    public City(CityRequest cityRequest) {
+        this.name = cityRequest.city();
+    }
 }
