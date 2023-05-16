@@ -12,7 +12,7 @@ public class CheckMaxTemperatureValue implements ForecastSystemChecker{
     public void check(Forecast forecast) {
         BigDecimal maxTemperature = forecast.getMaxTemperature();
 
-        if (maxTemperature.compareTo(new BigDecimal("-50")) < 0 || maxTemperature.compareTo(new BigDecimal("+50")) > 0){
+        if (maxTemperature.compareTo(new BigDecimal("-50")) < 0 || maxTemperature.compareTo(new BigDecimal("50")) > 0){
             throw new InvalidValueException("O valor da temperatura máxima precisa ser >= -50°C e <= a +50°C.");
         }
     }

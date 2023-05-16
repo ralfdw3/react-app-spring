@@ -12,7 +12,7 @@ public class CheckMinTemperatureValue implements ForecastSystemChecker{
     public void check(Forecast forecast) {
         BigDecimal minTemperature = forecast.getMinTemperature();
 
-        if (minTemperature.compareTo(new BigDecimal("-50")) < 0 || minTemperature.compareTo(new BigDecimal("+50")) > 0){
+        if (minTemperature.compareTo(new BigDecimal("-50")) < 0 || minTemperature.compareTo(new BigDecimal("50")) > 0){
             throw new InvalidValueException("O valor da temperatura mínima precisa ser >= -50°C e <= a +50°C.");
         }
     }

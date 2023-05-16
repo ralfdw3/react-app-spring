@@ -1,6 +1,5 @@
 package br.dbserver.project.controller;
 
-import br.dbserver.project.dto.forecast.ForecastDelete;
 import br.dbserver.project.dto.forecast.ForecastRequest;
 import br.dbserver.project.dto.forecast.ForecastResponse;
 import br.dbserver.project.dto.forecast.ForecastUpdate;
