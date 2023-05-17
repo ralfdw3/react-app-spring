@@ -1,6 +1,5 @@
 package br.dbserver.project.service;
 
-import br.dbserver.project.dto.forecast.ForecastDelete;
 import br.dbserver.project.dto.forecast.ForecastRequest;
 import br.dbserver.project.dto.forecast.ForecastUpdate;
 import br.dbserver.project.exceptions.InvalidValueException;

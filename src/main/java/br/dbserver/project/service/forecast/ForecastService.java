@@ -76,12 +76,6 @@ public class ForecastService implements ForecastServiceInterface {
     }
 
     private Forecast getForecastById(Long id) {
-        Optional<Forecast> forecast = forecastRepository.findById(id);
-
-        if (!forecast.isEmpty()) {
-            return forecast.get();
-        }
-
-        throw new NotFoundException("Previsão de tempo não encontrada.");
+        return forecastRepository.findById(id).orElseThrow(() -> new NotFoundException("Previsão de tempo não encontrada."));
     }
 }
