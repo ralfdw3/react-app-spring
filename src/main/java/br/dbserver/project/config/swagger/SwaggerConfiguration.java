@@ -13,7 +13,10 @@ public class SwaggerConfiguration {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .components(new Components())
-                .info(new Info().title("API de Webvote")
-                        .description("Esta API permite criar associados, pautas e votar nas pautas"));
+                .info(new Info().title("API de Previsão de Tempo")
+                        .description("""
+                                Esta API permite criar novas previsões de tempo,
+                                buscar todas as previsões de uma cidade com paginação,
+                                além disso deletar e editar previsões."""));
     }
 }
