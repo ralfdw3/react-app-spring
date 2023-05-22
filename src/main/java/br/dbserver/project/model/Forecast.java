@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -52,6 +53,9 @@ public class Forecast {
     @Column(nullable = false)
     private Integer airSpeed;
 
+    @Column(nullable = false)
+    private LocalDate date;
+
     public Forecast(ForecastRequest forecastRequest, City city) {
         this.city = city;
         this.weather = forecastRequest.weather();
@@ -61,6 +65,7 @@ public class Forecast {
         this.precipitation = forecastRequest.precipitation();
         this.humidity = forecastRequest.humidity();
         this.airSpeed = forecastRequest.airSpeed();
+        this.date = forecastRequest.date();
     }
 
     public void updateForecast(ForecastUpdate forecast, City city){
@@ -72,6 +77,7 @@ public class Forecast {
         this.precipitation = forecast.precipitation();
         this.humidity = forecast.humidity();
         this.airSpeed = forecast.airSpeed();
+        this.date = forecast.date();
     }
 
 }

@@ -16,8 +16,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ForecastService implements ForecastServiceInterface {
@@ -52,6 +52,14 @@ public class ForecastService implements ForecastServiceInterface {
         return ResponseEntity.ok().body(forecasts);
     }
 
+    @Override
+    public ResponseEntity getWeekForecastsByCity(String cityName, Pageable pageable) {
+        City city = cityService.getCityByName(cityName);
+        Page<Forecast> forecasts = forecastRepository.findAllByCityIdAndDateGreaterThan(city.getId(), LocalDate.now(), pageable);
+
+        return ResponseEntity.ok().body(forecasts);
+    }
+
     @Transactional
     @Override
     public ResponseEntity updateForecast(ForecastUpdate forecastUpdate) {
@@ -73,6 +81,17 @@ public class ForecastService implements ForecastServiceInterface {
         forecastRepository.delete(forecast);
 
         return ResponseEntity.ok(new ForecastResponse(forecast));
+    }
+
+    @Override
+    public ResponseEntity getTodayForecast(String cityName, LocalDate date) {
+        City city = cityService.getCityByName(cityName);
+        Forecast forecast = forecastRepository.findByCityAndDate(city, date);
+
+        if (forecast != null)
+            return ResponseEntity.ok(new ForecastResponse(forecast));
+
+        throw new NotFoundException("Previsão de tempo não encontrada.");
     }
 
     private Forecast getForecastById(Long id) {

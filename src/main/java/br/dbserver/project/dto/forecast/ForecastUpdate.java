@@ -6,6 +6,7 @@ import br.dbserver.project.model.Forecast;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public record ForecastUpdate(
         @NotNull
@@ -17,11 +18,12 @@ public record ForecastUpdate(
         BigDecimal minTemperature,
         Integer precipitation,
         Integer humidity,
-        Integer airSpeed) {
+        Integer airSpeed,
+        LocalDate date) {
 
         public ForecastUpdate(Forecast forecast) {
                 this(forecast.getId(), forecast.getCity().getName(), forecast.getWeather(), forecast.getShift(), forecast.getMaxTemperature(),
                         forecast.getMinTemperature(), forecast.getPrecipitation(),
-                        forecast.getHumidity(), forecast.getAirSpeed());
+                        forecast.getHumidity(), forecast.getAirSpeed(), forecast.getDate());
         }
 }
