@@ -41,7 +41,7 @@ public class ForecastController {
     @GetMapping
     private ResponseEntity getTodayForecast (@RequestParam("city") @NotBlank String city,
                                              @RequestParam("date") @NotNull LocalDate date){
-        return forecastService.getTodayForecast(city, date);
+        return forecastService.getForecastByCityAndDate(city, date);
     }
 
     @PostMapping

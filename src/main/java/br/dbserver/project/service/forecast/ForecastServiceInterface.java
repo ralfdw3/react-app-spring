@@ -14,5 +14,5 @@ public interface ForecastServiceInterface {
     ResponseEntity getWeekForecastsByCity (String cityName, Pageable pageable);
     ResponseEntity updateForecast(ForecastUpdate forecastUpdate);
     ResponseEntity deleteForecast(Long id);
-    ResponseEntity getTodayForecast(String city, LocalDate date);
+    ResponseEntity getForecastByCityAndDate(String city, LocalDate date);
 }

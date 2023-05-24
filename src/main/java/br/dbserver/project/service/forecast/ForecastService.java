@@ -84,7 +84,7 @@ public class ForecastService implements ForecastServiceInterface {
     }
 
     @Override
-    public ResponseEntity getTodayForecast(String cityName, LocalDate date) {
+    public ResponseEntity getForecastByCityAndDate(String cityName, LocalDate date) {
         City city = cityService.getCityByName(cityName);
         Forecast forecast = forecastRepository.findByCityAndDate(city, date);
 
