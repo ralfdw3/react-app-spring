@@ -3,6 +3,7 @@ package br.dbserver.project.service.forecast;
 import br.dbserver.project.dto.forecast.ForecastRequest;
 import br.dbserver.project.dto.forecast.ForecastResponse;
 import br.dbserver.project.dto.forecast.ForecastUpdate;
+import br.dbserver.project.exceptions.BadRequestException;
 import br.dbserver.project.exceptions.NotFoundException;
 import br.dbserver.project.model.City;
 import br.dbserver.project.model.Forecast;
@@ -39,6 +40,11 @@ public class ForecastService implements ForecastServiceInterface {
         City city = cityService.getCityByName(forecastRequest.city());
         Forecast forecast = new Forecast(forecastRequest, city);
         checkForecast.forEach(f -> f.check(forecast));
+
+        if (forecastRepository.findByCityAndDate(forecast.getCity(), forecast.getDate()) != null){
+            throw new BadRequestException("Já existe uma previsão cadastrada nesta data para esta cidade");
+        }
+
         forecastRepository.save(forecast);
 
         return ResponseEntity.ok(new ForecastResponse(forecast));
