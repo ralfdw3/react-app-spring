@@ -69,7 +69,7 @@ public class ForecastService implements ForecastServiceInterface {
     @Transactional
     @Override
     public ResponseEntity updateForecast(ForecastUpdate forecastUpdate) {
-        City city = cityService.getCityByName(forecastUpdate.cityName());
+        City city = cityService.getCityByName(forecastUpdate.city());
         Forecast forecast = getForecastById(forecastUpdate.id());
         forecast.updateForecast(forecastUpdate, city);
         checkForecast.forEach(f -> f.check(forecast));
