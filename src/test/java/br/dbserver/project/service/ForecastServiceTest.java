@@ -160,4 +160,54 @@ public class ForecastServiceTest {
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
+
+    @Test
+    public void Should_ReturnChuvaNoite_When_SettingWeatherStatus() throws Exception {
+        Forecast forecast = ForecastStub.forecastWithStatusChuvaNoite();
+        forecastService.setWeatherStatus(forecast);
+        assertEquals("Noite chuvosa", forecast.getWeatherStatus());
+    }
+
+    @Test
+    public void Should_ReturnChuvaDia_When_SettingWeatherStatus() throws Exception {
+        Forecast forecast = ForecastStub.forecastWithStatusChuvaDia();
+        forecastService.setWeatherStatus(forecast);
+        assertEquals("Dia chuvoso", forecast.getWeatherStatus());
+    }
+
+    @Test
+    public void Should_ReturnTempestade_When_SettingWeatherStatus() throws Exception {
+        Forecast forecast = ForecastStub.forecastWithStatusTempestade();
+        forecastService.setWeatherStatus(forecast);
+        assertEquals("Tempestade", forecast.getWeatherStatus());
+    }
+
+    @Test
+    public void Should_ReturnNubladoNoite_When_SettingWeatherStatus() throws Exception {
+        Forecast forecast = ForecastStub.forecastWithStatusNubladoNoite();
+        forecastService.setWeatherStatus(forecast);
+        assertEquals("Noite nublada", forecast.getWeatherStatus());
+    }
+
+    @Test
+    public void Should_ReturnNubladoDia_When_SettingWeatherStatus() throws Exception {
+        Forecast forecast = ForecastStub.forecastWithStatusNubladoDia();
+        forecastService.setWeatherStatus(forecast);
+        assertEquals("Dia nublado", forecast.getWeatherStatus());
+    }
+
+    @Test
+    public void Should_ReturnSolComNuvens_When_SettingWeatherStatus() throws Exception {
+        Forecast forecast = ForecastStub.forecastWithStatusSolComNuvens();
+        forecastService.setWeatherStatus(forecast);
+        assertEquals("Sol com nuvens", forecast.getWeatherStatus());
+    }
+
+    @Test
+    public void Should_ReturnSol_When_SettingWeatherStatus() throws Exception {
+        Forecast forecast = ForecastStub.forecastWithStatusSol();
+        forecastService.setWeatherStatus(forecast);
+        assertEquals("Sol", forecast.getWeatherStatus());
+    }
+
 }

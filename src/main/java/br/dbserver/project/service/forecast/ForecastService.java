@@ -3,6 +3,8 @@ package br.dbserver.project.service.forecast;
 import br.dbserver.project.dto.forecast.ForecastRequest;
 import br.dbserver.project.dto.forecast.ForecastResponse;
 import br.dbserver.project.dto.forecast.ForecastUpdate;
+import br.dbserver.project.enums.Shift;
+import br.dbserver.project.enums.Weather;
 import br.dbserver.project.exceptions.BadRequestException;
 import br.dbserver.project.exceptions.NotFoundException;
 import br.dbserver.project.model.City;
@@ -44,7 +46,7 @@ public class ForecastService implements ForecastServiceInterface {
         if (forecastRepository.findByCityAndDate(forecast.getCity(), forecast.getDate()) != null){
             throw new BadRequestException("Já existe uma previsão cadastrada nesta data para esta cidade");
         }
-
+        setWeatherStatus(forecast);
         forecastRepository.save(forecast);
 
         return ResponseEntity.ok(new ForecastResponse(forecast));
@@ -73,7 +75,7 @@ public class ForecastService implements ForecastServiceInterface {
         Forecast forecast = getForecastById(forecastUpdate.id());
         forecast.updateForecast(forecastUpdate, city);
         checkForecast.forEach(f -> f.check(forecast));
-
+        setWeatherStatus(forecast);
         forecastRepository.save(forecast);
 
         return ResponseEntity.ok(new ForecastResponse(forecast));
@@ -98,6 +100,43 @@ public class ForecastService implements ForecastServiceInterface {
             return ResponseEntity.ok(new ForecastResponse(forecast));
 
         throw new NotFoundException("Previsão de tempo não encontrada.");
+    }
+
+    @Override
+    public void setWeatherStatus(Forecast forecast) {
+        Shift shift = forecast.getShift();
+        Weather weather = forecast.getWeather();
+        Integer precipitation = forecast.getPrecipitation();
+        Integer humidity = forecast.getHumidity();
+        Integer airSpeed = forecast.getAirSpeed();
+
+        if (shift == Shift.NIGHT && precipitation > 80) {
+            forecast.setWeatherStatus("Noite chuvosa");
+        }
+
+        else if (shift == Shift.DAY && weather == Weather.CLEAR && precipitation > 80) {
+            forecast.setWeatherStatus("Dia chuvoso");
+        }
+
+        else if (weather == Weather.STORM && precipitation > 80 && airSpeed > 15) {
+            forecast.setWeatherStatus("Tempestade");
+        }
+
+        else if (shift == Shift.NIGHT && precipitation > 50) {
+            forecast.setWeatherStatus("Noite nublada");
+        }
+
+        else if (shift == Shift.DAY && precipitation > 50) {
+            forecast.setWeatherStatus("Dia nublado");
+        }
+
+        else if (shift == Shift.DAY && precipitation > 20) {
+            forecast.setWeatherStatus("Sol com nuvens");
+        }
+
+        else if (shift == Shift.DAY && weather == Weather.CLEAR && precipitation < 10 && humidity < 30) {
+            forecast.setWeatherStatus("Sol");
+        }
     }
 
     private Forecast getForecastById(Long id) {

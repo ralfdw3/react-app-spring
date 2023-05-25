@@ -16,11 +16,12 @@ public record ForecastResponse(
         Integer precipitation,
         Integer humidity,
         Integer airSpeed,
-        LocalDate date) {
+        LocalDate date,
+        String weatherStatus) {
 
     public ForecastResponse(Forecast forecast) {
         this(forecast.getCity().getName(), forecast.getWeather(), forecast.getShift(), forecast.getMaxTemperature(),
                 forecast.getMinTemperature(), forecast.getPrecipitation(),
-                forecast.getHumidity(), forecast.getAirSpeed(), forecast.getDate());
+                forecast.getHumidity(), forecast.getAirSpeed(), forecast.getDate(), forecast.getWeatherStatus());
     }
 }

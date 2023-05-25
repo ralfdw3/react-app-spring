@@ -5,16 +5,14 @@ import br.dbserver.project.dto.forecast.ForecastUpdate;
 import br.dbserver.project.enums.Shift;
 import br.dbserver.project.enums.Weather;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
@@ -56,6 +54,8 @@ public class Forecast {
     @Column(nullable = false)
     private LocalDate date;
 
+    private String weatherStatus;
+
     public Forecast(ForecastRequest forecastRequest, City city) {
         this.city = city;
         this.weather = forecastRequest.weather();
@@ -80,4 +80,15 @@ public class Forecast {
         this.date = forecast.date();
     }
 
+    public Forecast(Long id, City city, Weather weather, Shift shift, BigDecimal maxTemperature, BigDecimal minTemperature, Integer precipitation, Integer humidity, Integer airSpeed) {
+        this.id = id;
+        this.city = city;
+        this.weather = weather;
+        this.shift = shift;
+        this.maxTemperature = maxTemperature;
+        this.minTemperature = minTemperature;
+        this.precipitation = precipitation;
+        this.humidity = humidity;
+        this.airSpeed = airSpeed;
+    }
 }
