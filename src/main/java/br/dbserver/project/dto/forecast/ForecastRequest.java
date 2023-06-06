@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public record ForecastRequest(
         @NotBlank
@@ -24,11 +25,13 @@ public record ForecastRequest(
         @NotNull
         Integer humidity,
         @NotNull
-        Integer airSpeed) {
+        Integer airSpeed,
+        @NotNull
+        LocalDate date) {
 
-        public ForecastRequest(Forecast forecast) {
-                this(forecast.getCity().getName(), forecast.getWeather(), forecast.getShift(), forecast.getMaxTemperature(),
-                        forecast.getMinTemperature(), forecast.getPrecipitation(),
-                        forecast.getHumidity(), forecast.getAirSpeed());
-        }
+    public ForecastRequest(Forecast forecast) {
+        this(forecast.getCity().getName(), forecast.getWeather(), forecast.getShift(), forecast.getMaxTemperature(),
+                forecast.getMinTemperature(), forecast.getPrecipitation(),
+                forecast.getHumidity(), forecast.getAirSpeed(), forecast.getDate());
+    }
 }

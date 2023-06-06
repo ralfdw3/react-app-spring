@@ -3,32 +3,25 @@ package br.dbserver.project.dto.forecast;
 import br.dbserver.project.enums.Shift;
 import br.dbserver.project.enums.Weather;
 import br.dbserver.project.model.Forecast;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public record ForecastResponse(
-        @NotBlank
         String city,
-        @NotNull
         Weather weather,
-        @NotNull
         Shift shift,
-        @NotNull
         BigDecimal maxTemperature,
-        @NotNull
         BigDecimal minTemperature,
-        @NotNull
         Integer precipitation,
-        @NotNull
         Integer humidity,
-        @NotNull
-        Integer airSpeed) {
+        Integer airSpeed,
+        LocalDate date,
+        String weatherStatus) {
 
     public ForecastResponse(Forecast forecast) {
         this(forecast.getCity().getName(), forecast.getWeather(), forecast.getShift(), forecast.getMaxTemperature(),
                 forecast.getMinTemperature(), forecast.getPrecipitation(),
-                forecast.getHumidity(), forecast.getAirSpeed());
+                forecast.getHumidity(), forecast.getAirSpeed(), forecast.getDate(), forecast.getWeatherStatus());
     }
 }
