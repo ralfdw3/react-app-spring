@@ -43,7 +43,7 @@ public class ForecastService implements ForecastServiceInterface {
         Forecast forecast = new Forecast(forecastRequest, city);
         checkForecast.forEach(f -> f.check(forecast));
 
-        if (forecastRepository.findByCityAndDate(forecast.getCity(), forecast.getDate()) != null){
+        if (forecastRepository.findByCityAndDate(forecast.getCity(), forecast.getDate()) != null) {
             throw new BadRequestException("Já existe uma previsão cadastrada nesta data para esta cidade");
         }
         setWeatherStatus(forecast);
@@ -112,29 +112,17 @@ public class ForecastService implements ForecastServiceInterface {
 
         if (shift == Shift.NIGHT && precipitation > 80) {
             forecast.setWeatherStatus("Noite chuvosa");
-        }
-
-        else if (shift == Shift.DAY && weather == Weather.CLEAR && precipitation > 80) {
+        } else if (shift == Shift.DAY && weather == Weather.CLEAR && precipitation > 80) {
             forecast.setWeatherStatus("Dia chuvoso");
-        }
-
-        else if (weather == Weather.STORM && precipitation > 80 && airSpeed > 15) {
+        } else if (weather == Weather.STORM && precipitation > 80 && airSpeed > 15) {
             forecast.setWeatherStatus("Tempestade");
-        }
-
-        else if (shift == Shift.NIGHT && precipitation > 50) {
+        } else if (shift == Shift.NIGHT && precipitation > 50) {
             forecast.setWeatherStatus("Noite nublada");
-        }
-
-        else if (shift == Shift.DAY && precipitation > 50) {
+        } else if (shift == Shift.DAY && precipitation > 50) {
             forecast.setWeatherStatus("Dia nublado");
-        }
-
-        else if (shift == Shift.DAY && precipitation > 20) {
+        } else if (shift == Shift.DAY && precipitation > 20) {
             forecast.setWeatherStatus("Sol com nuvens");
-        }
-
-        else if (shift == Shift.DAY && weather == Weather.CLEAR && precipitation < 10 && humidity < 30) {
+        } else if (shift == Shift.DAY && weather == Weather.CLEAR && precipitation < 10 && humidity < 30) {
             forecast.setWeatherStatus("Sol");
         }
     }

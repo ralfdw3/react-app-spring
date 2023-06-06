@@ -12,19 +12,19 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ErrorHandler {
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity notFound(Exception ex){
+    public ResponseEntity notFound(Exception ex) {
         HttpStatus httpStatus = HttpStatus.NOT_FOUND;
         return ResponseEntity.status(httpStatus).body(ex.getMessage());
     }
 
     @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity badRequest(Exception ex){
+    public ResponseEntity badRequest(Exception ex) {
         HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
         return ResponseEntity.status(httpStatus).body(ex.getMessage());
     }
 
     @ExceptionHandler(InvalidValueException.class)
-    public ResponseEntity badRequestCheck(Exception ex){
+    public ResponseEntity badRequestCheck(Exception ex) {
         HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
         return ResponseEntity.status(httpStatus).body(ex.getMessage());
     }

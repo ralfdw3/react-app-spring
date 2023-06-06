@@ -6,7 +6,6 @@ import br.dbserver.project.model.Forecast;
 import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 

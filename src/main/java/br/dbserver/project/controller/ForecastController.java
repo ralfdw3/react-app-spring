@@ -23,39 +23,40 @@ import java.time.LocalDate;
 public class ForecastController {
 
     private ForecastServiceInterface forecastService;
+
     @Autowired
     public ForecastController(ForecastServiceInterface forecastService) {
         this.forecastService = forecastService;
     }
 
     @GetMapping(path = "/all")
-    private ResponseEntity<Page<ForecastResponse>> getForecastsByCity (@RequestParam("cityName") String cityName, @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+    private ResponseEntity<Page<ForecastResponse>> getForecastsByCity(@RequestParam("cityName") String cityName, @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         return forecastService.getForecastsByCity(cityName, pageable);
     }
 
     @GetMapping(path = "/week")
-    private ResponseEntity<Page<ForecastResponse>> getWeekForecastsByCity (@RequestParam("cityName") String cityName, @PageableDefault(size = 6, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+    private ResponseEntity<Page<ForecastResponse>> getWeekForecastsByCity(@RequestParam("cityName") String cityName, @PageableDefault(size = 6, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         return forecastService.getWeekForecastsByCity(cityName, pageable);
     }
 
     @GetMapping
-    private ResponseEntity getTodayForecast (@RequestParam("city") @NotBlank String city,
-                                             @RequestParam("date") @NotNull LocalDate date){
+    private ResponseEntity getTodayForecast(@RequestParam("city") @NotBlank String city,
+                                            @RequestParam("date") @NotNull LocalDate date) {
         return forecastService.getForecastByCityAndDate(city, date);
     }
 
     @PostMapping
-    private ResponseEntity saveForecast(@RequestBody @Valid ForecastRequest forecastRequest){
+    private ResponseEntity saveForecast(@RequestBody @Valid ForecastRequest forecastRequest) {
         return forecastService.saveForecast(forecastRequest);
     }
 
     @PutMapping
-    private ResponseEntity updateForecast(@RequestBody @Valid ForecastUpdate forecastUpdate){
+    private ResponseEntity updateForecast(@RequestBody @Valid ForecastUpdate forecastUpdate) {
         return forecastService.updateForecast(forecastUpdate);
     }
 
     @DeleteMapping
-    private ResponseEntity deleteForecast(@RequestParam("id") Long id){
+    private ResponseEntity deleteForecast(@RequestParam("id") Long id) {
         return forecastService.deleteForecast(id);
     }
 }

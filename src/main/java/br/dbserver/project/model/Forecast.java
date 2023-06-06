@@ -24,7 +24,7 @@ public class Forecast {
 
     @ManyToOne
     @JoinTable(name = "city_forecast", joinColumns = {
-            @JoinColumn(name = "id_forecast", nullable = false, referencedColumnName = "id") }, inverseJoinColumns = {
+            @JoinColumn(name = "id_forecast", nullable = false, referencedColumnName = "id")}, inverseJoinColumns = {
             @JoinColumn(name = "id_city", nullable = false, referencedColumnName = "id")})
     private City city;
 
@@ -68,7 +68,7 @@ public class Forecast {
         this.date = forecastRequest.date();
     }
 
-    public void updateForecast(ForecastUpdate forecast, City city){
+    public void updateForecast(ForecastUpdate forecast, City city) {
         this.city = city;
         this.weather = forecast.weather();
         this.shift = forecast.shift();

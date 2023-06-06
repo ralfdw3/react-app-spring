@@ -31,9 +31,9 @@ public record ForecastUpdate(
         @NotNull
         LocalDate date) {
 
-        public ForecastUpdate(Forecast forecast) {
-                this(forecast.getId(), forecast.getCity().getName(), forecast.getWeather(), forecast.getShift(), forecast.getMaxTemperature(),
-                        forecast.getMinTemperature(), forecast.getPrecipitation(),
-                        forecast.getHumidity(), forecast.getAirSpeed(), forecast.getDate());
-        }
+    public ForecastUpdate(Forecast forecast) {
+        this(forecast.getId(), forecast.getCity().getName(), forecast.getWeather(), forecast.getShift(), forecast.getMaxTemperature(),
+                forecast.getMinTemperature(), forecast.getPrecipitation(),
+                forecast.getHumidity(), forecast.getAirSpeed(), forecast.getDate());
+    }
 }

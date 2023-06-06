@@ -12,7 +12,9 @@ import java.time.LocalDate;
 @Repository
 public interface ForecastRepository extends JpaRepository<Forecast, Long> {
     Page<Forecast> findAllByCityId(Long cityId, Pageable pageable);
+
     Page<Forecast> findAllByCityIdAndDateGreaterThan(Long cityId, LocalDate date, Pageable pageable);
+
     Forecast findByCityAndDate(City city, LocalDate date);
 
 }
