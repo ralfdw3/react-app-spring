@@ -22,9 +22,9 @@ Este é o backend do aplicativo de Previsão de Tempo, desenvolvido em Java Spri
 
 Edite o arquivo `application.properties` em `src/main/resources` para configurar as seguintes propriedades:
 
-spring.datasource.url=jdbc:mysql://localhost:3306/nome_do_banco
-spring.datasource.username=usuario
-spring.datasource.password=senha
+- spring.datasource.url=jdbc:mysql://localhost:3306/nome_do_banco
+- spring.datasource.username=usuario
+- spring.datasource.password=senha
 
 ## Instalação
 
