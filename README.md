@@ -33,3 +33,6 @@ Edite o arquivo `application.properties` em `src/main/resources` para configurar
 3. Execute o seguinte comando para buildar o projeto: build gradle
 4. Execute o seguinte comando para executar o projeto: gradle bootRun
 
+O backend estará em execução na porta `8080`.
+Você pode acessar os endpoints da API em "http://localhost:8080/swagger-ui/index.html".
+
