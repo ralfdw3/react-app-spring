@@ -80,7 +80,7 @@ public class Forecast {
         this.date = forecast.date();
     }
 
-    public Forecast(Long id, City city, Weather weather, Shift shift, BigDecimal maxTemperature, BigDecimal minTemperature, Integer precipitation, Integer humidity, Integer airSpeed) {
+    public Forecast(Long id, City city, Weather weather, Shift shift, BigDecimal maxTemperature, BigDecimal minTemperature, Integer precipitation, Integer humidity, Integer airSpeed, LocalDate date) {
         this.id = id;
         this.city = city;
         this.weather = weather;
@@ -90,5 +90,6 @@ public class Forecast {
         this.precipitation = precipitation;
         this.humidity = humidity;
         this.airSpeed = airSpeed;
+        this.date = date;
     }
 }
