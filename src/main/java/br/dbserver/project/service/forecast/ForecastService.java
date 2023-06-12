@@ -124,6 +124,8 @@ public class ForecastService implements ForecastServiceInterface {
             forecast.setWeatherStatus("Sol com nuvens");
         } else if (shift == Shift.DAY && weather == Weather.CLEAR && precipitation < 10 && humidity < 30) {
             forecast.setWeatherStatus("Sol");
+        } else {
+            forecast.setWeatherStatus("Sol");
         }
     }
 

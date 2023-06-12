@@ -51,7 +51,7 @@ public class Forecast {
     @Column(nullable = false)
     private Integer airSpeed;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "forecast_date")
     private LocalDate date;
 
     private String weatherStatus;

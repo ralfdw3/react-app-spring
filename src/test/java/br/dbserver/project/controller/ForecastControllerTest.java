@@ -125,4 +125,18 @@ public class ForecastControllerTest {
                         .param("id", String.valueOf(1L)))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    @SqlGroup({
+            @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = {insertCity, insertForecast, insertCityForecast}),
+            @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD, scripts = reset)
+    })
+    public void Should_ReturnOk_When_GettingAllForecastsByCity() throws Exception {
+        mockMvc.perform(get(BASE_URL + "/all")
+                        .param("cityName", "Lajeado")
+                        .param("page", "0")
+                        .param("size", "10")
+                        .param("sort", "id"))
+                .andExpect(status().isOk());
+    }
 }
