@@ -3,9 +3,9 @@ package br.dbserver.project.dto.forecast;
 import br.dbserver.project.enums.Shift;
 import br.dbserver.project.enums.Weather;
 import br.dbserver.project.model.Forecast;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 

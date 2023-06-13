@@ -12,13 +12,13 @@ import br.dbserver.project.model.Forecast;
 import br.dbserver.project.repository.ForecastRepository;
 import br.dbserver.project.service.city.CityService;
 import br.dbserver.project.service.forecast.check.ForecastSystemChecker;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -110,23 +110,31 @@ public class ForecastService implements ForecastServiceInterface {
         Integer humidity = forecast.getHumidity();
         Integer airSpeed = forecast.getAirSpeed();
 
-        if (shift == Shift.NIGHT && precipitation > 80) {
+        if (shift == Shift.NIGHT && weather == Weather.CLEAR && precipitation > 80) {
             forecast.setWeatherStatus("Noite chuvosa");
+
         } else if (shift == Shift.DAY && weather == Weather.CLEAR && precipitation > 80) {
             forecast.setWeatherStatus("Dia chuvoso");
-        } else if (weather == Weather.STORM && precipitation > 80 && airSpeed > 15) {
+
+        } else if (weather == Weather.STORM && precipitation > 80 && airSpeed > 20) {
             forecast.setWeatherStatus("Tempestade");
-        } else if (shift == Shift.NIGHT && precipitation > 50) {
+
+        } else if (shift == Shift.NIGHT && weather == Weather.CLEAR && precipitation > 30 && humidity > 60) {
             forecast.setWeatherStatus("Noite nublada");
-        } else if (shift == Shift.DAY && precipitation > 50) {
+
+        } else if (shift == Shift.DAY && weather == Weather.CLEAR && precipitation > 30 && humidity > 60) {
             forecast.setWeatherStatus("Dia nublado");
-        } else if (shift == Shift.DAY && precipitation > 20) {
+
+        } else if (shift == Shift.DAY && weather == Weather.CLEAR && precipitation < 10 && humidity < 20) {
+            forecast.setWeatherStatus("Sol");
+
+        } else if (shift == Shift.DAY) {
             forecast.setWeatherStatus("Sol com nuvens");
-        } else if (shift == Shift.DAY && weather == Weather.CLEAR && precipitation < 10 && humidity < 30) {
-            forecast.setWeatherStatus("Sol");
-        } else {
-            forecast.setWeatherStatus("Sol");
+
+        } else if (shift == Shift.NIGHT) {
+            forecast.setWeatherStatus("Noite");
         }
+
     }
 
     private Forecast getForecastById(Long id) {

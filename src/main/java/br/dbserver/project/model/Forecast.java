@@ -4,9 +4,9 @@ import br.dbserver.project.dto.forecast.ForecastRequest;
 import br.dbserver.project.dto.forecast.ForecastUpdate;
 import br.dbserver.project.enums.Shift;
 import br.dbserver.project.enums.Weather;
-import jakarta.persistence.*;
 import lombok.*;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 

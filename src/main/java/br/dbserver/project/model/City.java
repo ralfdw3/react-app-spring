@@ -1,10 +1,11 @@
 package br.dbserver.project.model;
 
 import br.dbserver.project.dto.city.CityRequest;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Entity
 @Getter

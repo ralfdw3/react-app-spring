@@ -127,7 +127,7 @@ public class ForecastServiceTest {
 
     @Test
     public void Should_ReturnOk_When_GettingForecastsByCity() throws Exception {
-        Pageable pageable = PageRequest.of(0,10);
+        Pageable pageable = PageRequest.of(0, 10);
         Page<Forecast> forecastPage = new PageImpl<>(ForecastStub.forecastList().getBody(), pageable, ForecastStub.forecastList().getBody().size());
 
         when(forecastRepository.findAllByCityId(forecastDefault.getCity().getId(), pageable)).thenReturn(forecastPage);

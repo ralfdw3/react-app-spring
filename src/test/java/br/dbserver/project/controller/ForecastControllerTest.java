@@ -13,8 +13,6 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.LocalDate;
-
 import static br.dbserver.project.SqlProvider.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -50,7 +48,7 @@ public class ForecastControllerTest {
                 .andExpect(jsonPath("$.precipitation").value(20))
                 .andExpect(jsonPath("$.shift").value("DAY"))
                 .andExpect(jsonPath("$.weather").value("CLEAR"))
-                .andExpect(jsonPath("$.weatherStatus").value("Sol"))
+                .andExpect(jsonPath("$.weatherStatus").value("Sol com nuvens"))
                 .andExpect(jsonPath("$.date").value("2023-06-05"));
     }
 
