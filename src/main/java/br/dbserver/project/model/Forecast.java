@@ -4,9 +4,9 @@ import br.dbserver.project.dto.forecast.ForecastRequest;
 import br.dbserver.project.dto.forecast.ForecastUpdate;
 import br.dbserver.project.enums.Shift;
 import br.dbserver.project.enums.Weather;
-import jakarta.persistence.*;
 import lombok.*;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -24,7 +24,7 @@ public class Forecast {
 
     @ManyToOne
     @JoinTable(name = "city_forecast", joinColumns = {
-            @JoinColumn(name = "id_forecast", nullable = false, referencedColumnName = "id") }, inverseJoinColumns = {
+            @JoinColumn(name = "id_forecast", nullable = false, referencedColumnName = "id")}, inverseJoinColumns = {
             @JoinColumn(name = "id_city", nullable = false, referencedColumnName = "id")})
     private City city;
 
@@ -51,7 +51,7 @@ public class Forecast {
     @Column(nullable = false)
     private Integer airSpeed;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "forecast_date")
     private LocalDate date;
 
     private String weatherStatus;
@@ -68,7 +68,7 @@ public class Forecast {
         this.date = forecastRequest.date();
     }
 
-    public void updateForecast(ForecastUpdate forecast, City city){
+    public void updateForecast(ForecastUpdate forecast, City city) {
         this.city = city;
         this.weather = forecast.weather();
         this.shift = forecast.shift();
@@ -80,7 +80,7 @@ public class Forecast {
         this.date = forecast.date();
     }
 
-    public Forecast(Long id, City city, Weather weather, Shift shift, BigDecimal maxTemperature, BigDecimal minTemperature, Integer precipitation, Integer humidity, Integer airSpeed) {
+    public Forecast(Long id, City city, Weather weather, Shift shift, BigDecimal maxTemperature, BigDecimal minTemperature, Integer precipitation, Integer humidity, Integer airSpeed, LocalDate date) {
         this.id = id;
         this.city = city;
         this.weather = weather;
@@ -90,5 +90,6 @@ public class Forecast {
         this.precipitation = precipitation;
         this.humidity = humidity;
         this.airSpeed = airSpeed;
+        this.date = date;
     }
 }

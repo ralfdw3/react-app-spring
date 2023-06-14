@@ -1,8 +1,8 @@
 package br.dbserver.project.service.city;
 
+import br.dbserver.project.exceptions.NotFoundException;
 import br.dbserver.project.model.City;
 import br.dbserver.project.repository.CityRepository;
-import br.dbserver.project.exceptions.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

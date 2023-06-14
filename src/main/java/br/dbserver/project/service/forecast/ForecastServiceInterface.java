@@ -10,11 +10,17 @@ import java.time.LocalDate;
 
 public interface ForecastServiceInterface {
 
-    ResponseEntity saveForecast (ForecastRequest forecastRequest);
-    ResponseEntity getForecastsByCity (String cityName, Pageable pageable);
-    ResponseEntity getWeekForecastsByCity (String cityName, Pageable pageable);
+    ResponseEntity saveForecast(ForecastRequest forecastRequest);
+
+    ResponseEntity getForecastsByCity(String cityName, Pageable pageable);
+
+    ResponseEntity getWeekForecastsByCity(String cityName, Pageable pageable);
+
     ResponseEntity updateForecast(ForecastUpdate forecastUpdate);
+
     ResponseEntity deleteForecast(Long id);
+
     ResponseEntity getForecastByCityAndDate(String city, LocalDate date);
+
     void setWeatherStatus(Forecast forecast);
 }
